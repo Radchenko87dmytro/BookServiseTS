@@ -1,5 +1,6 @@
 import React from 'react';
 import { book } from '../../types';
+import { Hyperlink } from '../../components/Hyperlink';
 
 interface props {
     books: book[];
@@ -14,9 +15,7 @@ export const Books = ({ books }: props) => {
             </div>
             <div className="border-4 mx-24 rounded-md border-cyan-700 border-solid bg-slate-300">
                 {books.map((book) => (
-                    <p className="flex justify-center py-2 mx-36 my-10 border-4 rounded-md border-orange-300 border-solid bg-white">
-                        {book.name}
-                    </p>
+                    <Hyperlink content={book.name} link={`/book/${book.id}`} />
                 ))}
             </div>
         </div>

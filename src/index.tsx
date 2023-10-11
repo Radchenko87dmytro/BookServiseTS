@@ -7,6 +7,7 @@ import { Books } from './screens/Books';
 import { Book } from './screens/Book';
 import { book } from './types';
 import './index.css';
+import { Hyperlink } from './components/Hyperlink';
 
 const mock: book[] = [
     { id: 1, name: 'book1' },
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: '/book/:id',
         element: <Book books={mock} />,
     },
+    // {
+    //     path: '/book/:id',
+    //     element: <Hyperlink></Hyperlink> />,
+    // },
 ]);
 
 const root = ReactDOM.createRoot(

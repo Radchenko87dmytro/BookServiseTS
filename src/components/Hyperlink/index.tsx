@@ -7,7 +7,7 @@ interface props {
 
 export const Hyperlink = ({ link, content }: props) => {
     return (
-        <div>
+        <div className="flex justify-center py-4 mx-36 my-10 border-4 rounded-md border-orange-300 border-solid bg-white">
             <a
                 href={link}
                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

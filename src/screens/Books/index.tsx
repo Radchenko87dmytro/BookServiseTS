@@ -13,7 +13,7 @@ export const Books = ({ books }: props) => {
                     Books
                 </p>
             </div>
-            <div className="border-4 mx-24 rounded-md border-cyan-700 border-solid bg-slate-300">
+            <div className="border-4 mx-24 rounded-md border-cyan-700 border-solid bg-slate-300 ">
                 {books.map((book) => (
                     <Hyperlink content={book.name} link={`/book/${book.id}`} />
                 ))}

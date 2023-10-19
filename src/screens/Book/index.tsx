@@ -8,7 +8,7 @@ interface props {
 }
 
 const bookPagination = (content: string) => {
-    const step = 30;
+    const step = 100;
     const output: string[] = [];
 
     for (let i = 0; i < content.length; i += step) {
@@ -27,13 +27,29 @@ export const Book = ({ books }: props) => {
     const pages = bookPagination(filteredBook.content);
     console.log(pages);
 
+    const handlePreviousPage = () => {
+        if (pageNumber > 0) {
+            setPageNumber((state) => state - 1); // 0
+            navigate(`/book/${id}/${pageNumber}`); // 1
+        }
+    };
+
     return (
-        <div className="flex-coll justify-center bg-red-400 w-full h-full">
+        <div className="flex-coll flex-nowrap justify-center bg-slate-200 w-full h-full">
             <p className="flex justify-center font-bold mb-10 pt-10">
                 Book {filteredBook.name}
             </p>
-            <p className="px-20 ">{pages[pageNumber]}</p>
-            <div className="flex justify-center mt-10">
+            <p className="px-20 flex justify-center">{pages[pageNumber]}</p>
+            <p className="flex justify-center my-10 font-bold">
+                Page Number {pageNumber}
+            </p>
+            <div className="absolute bottom-20 w-full flex justify-center">
+                {pageNumber > 0 && (
+                    <Button
+                        onClick={handlePreviousPage}
+                        content={`Previous page: ${pageNumber - 1}`}
+                    />
+                )}
                 <Button
                     onClick={() => {
                         setPageNumber((state) => state + 1);

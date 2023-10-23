@@ -8,7 +8,7 @@ interface props {
 }
 
 const bookPagination = (content: string) => {
-    const step = 100;
+    const step = 200;
     const output: string[] = [];
 
     for (let i = 0; i < content.length; i += step) {

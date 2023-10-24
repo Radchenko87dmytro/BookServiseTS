@@ -23,7 +23,7 @@ export const Books = ({ books }: props) => {
     return (
         <div className="bg-teal-300 py-10 flex justify-center">
             <div className="absolute flex justify-center">
-                <p className="py-10 text-3xl text-green-600 flex justify-center font-bold">
+                <p className="py-8 text-3xl text-green-600 flex justify-center font-bold">
                     Books
                 </p>
             </div>

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './routes';
 import { Books } from './screens/Books';
 import { Book } from './screens/Book';
+
 import { book } from './types';
 import './index.css';
 import { Hyperlink } from './components/Hyperlink';
@@ -49,15 +50,11 @@ const router = createBrowserRouter([
     },
     {
         path: '/books',
-        element: <Books books={mock} />,
-    },
-    {
-        path: '/book/:id/:page',
-        element: <Book books={mock} />,
+        element: <Books />,
     },
     // {
-    //     path: `/book/' ${book.id}'`,
-    //     element: <Book books={mock} />,
+    //     path: '/book/:id/:page',
+    //     element: <Book />,
     // },
 ]);
 

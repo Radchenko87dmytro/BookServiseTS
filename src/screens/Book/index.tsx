@@ -1,62 +1,41 @@
-import React, { useState } from 'react';
-import { useNavigate, useNavigation, useParams } from 'react-router-dom';
-import { book } from '../../types';
-import { Button } from '../../components/Button';
+import { WolnelekturyAPIType } from '../../types';
 
 interface props {
-    books: book[];
+    book: WolnelekturyAPIType;
 }
 
-const bookPagination = (content: string) => {
-    const step = 200;
-    const output: string[] = [];
-
-    for (let i = 0; i < content.length; i += step) {
-        output.push(content.slice(i, i + step));
-    }
-
-    return output;
-};
-
-export const Book = ({ books }: props) => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [pageNumber, setPageNumber] = useState(1);
-    const filteredBook = books.filter((i) => i.id === (id && parseInt(id)))[0];
-    console.log(filteredBook);
-    const pages = bookPagination(filteredBook.content);
-    console.log(pages);
-
-    const handlePreviousPage = () => {
-        if (pageNumber > 0) {
-            setPageNumber((state) => state - 1); // 0
-            navigate(`/book/${id}/${pageNumber}`); // 1
-        }
-    };
-
+export const Book = ({ book }: props) => {
+    //{book}: props
+    //book
+    //console.log(book.title)
+    //console.log(book);
     return (
-        <div className="flex-coll flex-nowrap justify-center bg-slate-200 w-full h-full">
-            <p className="flex justify-center font-bold mb-10 pt-10">
-                Book {filteredBook.name}
-            </p>
-            <p className="px-20 flex justify-center">{pages[pageNumber]}</p>
-            <p className="flex justify-center my-10 font-bold">
-                Page Number {pageNumber}
-            </p>
-            <div className="absolute bottom-20 w-full flex justify-center">
-                {pageNumber > 0 && (
-                    <Button
-                        onClick={handlePreviousPage}
-                        content={`Previous page: ${pageNumber - 1}`}
-                    />
-                )}
-                <Button
-                    onClick={() => {
-                        setPageNumber((state) => state + 1);
-                        navigate(`/book/${id}/${pageNumber}`);
-                    }}
-                    content={`Next page: ${pageNumber + 1}`}
-                />
+        <div className=" shadow-2xl bg-white p-4">
+            {/* {book.simple_thumb} */}
+            <img src={book.simple_thumb}></img>
+            {/* <p className="border-4 border-solid border-gray-400">Some picture</p> */}
+            <div className="flex justify-between ">
+                <div>
+                    <p className="text-4xl">{book.title}</p>
+                    <p className="text-base">{book.author}</p>
+                </div>
+                <div className="flex items-center bg-lime-300">
+                    <svg
+                        className="w-6 h-6 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 21 20"
+                    >
+                        <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m11.479 1.712 2.367 4.8a.532.532 0 0 0 .4.292l5.294.769a.534.534 0 0 1 .3.91l-3.83 3.735a.534.534 0 0 0-.154.473l.9 5.272a.535.535 0 0 1-.775.563l-4.734-2.49a.536.536 0 0 0-.5 0l-4.73 2.487a.534.534 0 0 1-.775-.563l.9-5.272a.534.534 0 0 0-.154-.473L2.158 8.48a.534.534 0 0 1 .3-.911l5.294-.77a.532.532 0 0 0 .4-.292l2.367-4.8a.534.534 0 0 1 .96.004Z"
+                        />
+                    </svg>
+                </div>
             </div>
         </div>
     );

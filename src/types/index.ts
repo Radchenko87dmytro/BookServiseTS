@@ -21,3 +21,46 @@ export interface WolnelekturyAPIType {
     cover_thumb: string;
     liked: null;
 }
+
+export interface BookApiType {
+    title: string;
+    url: string;
+    language: string;
+    epochs: Author[];
+    genres: Author[];
+    kinds: Author[];
+    authors: Author[];
+    translators: Translator[];
+    fragment_data: null;
+    children: any[];
+    parent: null;
+    preview: boolean;
+    epub: string;
+    mobi: string;
+    pdf: string;
+    html: string;
+    txt: string;
+    fb2: string;
+    xml: string;
+    media: any[];
+    audio_length: string;
+    cover_color: string;
+    simple_cover: string;
+    cover_thumb: string;
+    cover: string;
+    simple_thumb: string;
+    isbn_pdf: string;
+    isbn_epub: string;
+    isbn_mobi: string;
+}
+
+export interface Author {
+    url: string;
+    href: string;
+    name: string;
+    slug: string;
+}
+
+export interface Translator {
+    name: string;
+}

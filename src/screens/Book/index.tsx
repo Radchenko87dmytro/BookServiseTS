@@ -1,3 +1,4 @@
+import { useNavigate, useNavigation } from 'react-router-dom';
 import { WolnelekturyAPIType } from '../../types';
 
 interface props {
@@ -5,18 +6,22 @@ interface props {
 }
 
 export const Book = ({ book }: props) => {
-    //{book}: props
-    //book
-    //console.log(book.title)
-    //console.log(book);
+    const navigate = useNavigate();
+    console.log(`/book/${book.slug}`);
+
     return (
-        <div className=" shadow-2xl bg-white p-4">
-            {/* {book.simple_thumb} */}
-            <img src={book.simple_thumb}></img>
-            {/* <p className="border-4 border-solid border-gray-400">Some picture</p> */}
+        <div
+            className=" shadow-2xl bg-white p-4"
+            onClick={() => navigate(`/book/${book.slug}`)}
+        >
+            <img
+                src={book.simple_thumb}
+                className="border-8 border-solid border-gray-400"
+            />
+
             <div className="flex justify-between ">
                 <div>
-                    <p className="text-4xl">{book.title}</p>
+                    <p className="text-2xl">{book.title}</p>
                     <p className="text-base">{book.author}</p>
                 </div>
                 <div className="flex items-center bg-lime-300">

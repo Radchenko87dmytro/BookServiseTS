@@ -6,36 +6,22 @@ import { getAllBooks } from '../../apiClient';
 import { WolnelekturyAPIType } from '../../types';
 import { Book } from '../Book';
 import { PaginationBooks } from '../../components/PaginationBooks';
+import { BookDetails } from '../BookDetails';
 
 interface props {
     //books: WolnelekturyAPIType;
-    // totalBooks: number;
-    // booksPerPage: number;
+    book: WolnelekturyAPIType;
+    //bookHandler: () => WolnelekturyAPIType;
 }
-
-const allBooksPagination = (books: WolnelekturyAPIType) => {
-    const step = 10;
-    const output: Object[] = [];
-    console.log(books);
-    //for (let i = 0; i < books.le) {
-    //output.push(content.slice(i, i + step));
-    // }
-
-    return output;
-};
 
 // const bookIntro = (longText: string): string =>
 //     longText.slice(0, 50).trim() + '...';
 
 export const Books = () => {
+    //{ bookHandler }: props
     const [books, setBooks] = useState<WolnelekturyAPIType[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage, setPostsPerPage] = useState(6);
-
-    //const filteredBook = books.filter((i) => i.id === (id && parseInt(id)))[0];
-    //console.log(filteredBook);
-    //const pages = bookPagination(filteredBook.content);
-    //console.log(pages);
 
     // const deleteBookHandler = (id: number) => {
     //     console.log(books);
@@ -69,10 +55,21 @@ export const Books = () => {
                     A list of books
                 </p>
             </div>
-            <div className="grid gap-10 grid-cols-3 grid-rows-3 my-28 ">
+            <div className="grid gap-10 grid-cols-3 grid-rows-3 my-28 w-3/4">
                 {/*mx-20 */}
                 {currentBooks.map((book, index) => (
-                    <Book key={index} book={book} /> //
+                    // () => props.bookHandler(book);
+                    // console.log(book);
+
+                    <Book
+                        book={book}
+                        key={index}
+                        //bookHandler={() => props.bookHandler(book)}
+                    /> //bookHandler={bookHandler}
+
+                    // <a href={`/books/bookDetails`} key={index}>
+                    //
+                    // </a>
 
                     // <div
                     //     className="mx-10 border-4 my-24 rounded-md border-cyan-700 border-solid bg-slate-100 "
@@ -102,9 +99,12 @@ export const Books = () => {
                     //     </p>
                     // </div>
                 ))}
+
                 <PaginationBooks
                     totalBooks={books.length}
                     booksPerPage={booksPerPage}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                 />
             </div>
         </div>

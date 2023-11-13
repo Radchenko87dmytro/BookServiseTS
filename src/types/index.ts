@@ -1,3 +1,5 @@
+import { title } from 'process';
+
 export interface book {
     id: number;
     name: string;
@@ -31,7 +33,7 @@ export interface BookApiType {
     kinds: Author[];
     authors: Author[];
     translators: Translator[];
-    fragment_data: null;
+    fragment_data: { html: string; title: string };
     children: any[];
     parent: null;
     preview: boolean;

@@ -20,11 +20,11 @@ export const Book = ({ book }: props) => {
             />
 
             <div className="flex justify-between ">
-                <div>
-                    <p className="text-2xl">{book.title}</p>
-                    <p className="text-base">{book.author}</p>
+                <div className="text-ellipsis overflow-hidden">
+                    <p className="text-2xl py-4">{book.title}</p>
+                    <p className="text-2xl">{book.author}</p>
                 </div>
-                <div className="flex items-center bg-lime-300">
+                <div className="flex items-center bg-lime-300 max-h-full ">
                     <svg
                         className="w-6 h-6 text-gray-800 dark:text-white"
                         aria-hidden="true"

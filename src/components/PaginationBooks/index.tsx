@@ -19,7 +19,7 @@ export const PaginationBooks = ({
     //const [currentPage, setCurrentPage] = useState(1)
     let pages = [];
 
-    for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage) && i < 21; i++) {
+    for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage) && i < 11; i++) {
         pages.push(i);
     }
 
@@ -31,7 +31,7 @@ export const PaginationBooks = ({
     let background;
 
     return (
-        <div className="flex ">
+        <div className="flex flex-wrap justify-center  col-span-3 h-1/2">
             {pages.map((page, index) => {
                 currentPage == page
                     ? (background = `bg-lime-500`)
@@ -44,9 +44,6 @@ export const PaginationBooks = ({
                         background={background}
                         onClick={() => {
                             setCurrentPage(page);
-                            console.log(
-                                'setCurrenPage((state: number) => page)'
-                            );
                         }}
                     />
                 );

@@ -66,3 +66,7 @@ export interface Author {
 export interface Translator {
     name: string;
 }
+
+export interface StoreType {
+    booksReducer: { books: WolnelekturyAPIType[] };
+}

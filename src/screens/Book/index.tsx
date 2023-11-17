@@ -11,7 +11,7 @@ export const Book = ({ book }: props) => {
 
     return (
         <div
-            className=" shadow-2xl bg-white p-4"
+            className="p-4 bg-white drop-shadow-lg hover:drop-shadow-2xl"
             onClick={() => navigate(`/book/${book.slug}`)}
         >
             <img
@@ -19,12 +19,12 @@ export const Book = ({ book }: props) => {
                 className="border-8 border-solid border-gray-400"
             />
 
-            <div className="flex justify-between ">
+            <div className="flex justify-between max-lg:flex-col">
                 <div className="text-ellipsis overflow-hidden">
                     <p className="text-2xl py-4">{book.title}</p>
                     <p className="text-2xl">{book.author}</p>
                 </div>
-                <div className="flex items-center bg-lime-300 max-h-full ">
+                <div className="flex items-center justify-center   bg-lime-300 max-h-full ">
                     <svg
                         className="w-6 h-6 text-gray-800 dark:text-white"
                         aria-hidden="true"

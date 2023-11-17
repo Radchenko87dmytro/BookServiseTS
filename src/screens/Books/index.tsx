@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { book } from '../../types';
+import { StoreType, book } from '../../types';
 import { Hyperlink } from '../../components/Hyperlink';
 import { Button } from '../../components/Button';
 import { getAllBooks } from '../../apiClient';
@@ -9,6 +9,8 @@ import { PaginationBooks } from '../../components/PaginationBooks';
 import { BookDetails } from '../BookDetails';
 import { Navbar } from '../../components/Navbar';
 import { Loading } from '../../components/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBooks } from '../../reducer';
 
 interface props {
     //books: WolnelekturyAPIType;
@@ -20,11 +22,19 @@ interface props {
 //     longText.slice(0, 50).trim() + '...';
 
 export const Books = () => {
-    //{ bookHandler }: props
+    const dispatch = useDispatch();
+    const booksState = useSelector(
+        (state: StoreType) => state.booksReducer.books
+    );
+    console.log(booksState);
     const [isLoading, setIsLoading] = useState(true);
-    const [books, setBooks] = useState<WolnelekturyAPIType[]>([]);
+    //const [books, setBooks] = useState<WolnelekturyAPIType[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage, setPostsPerPage] = useState(6);
+    const [booksPerPage, setBooksPerPage] = useState(6);
+
+    const lastBooksIndex = currentPage * booksPerPage;
+    const firstBooksIndex = lastBooksIndex - booksPerPage;
+    const currentBooks = booksState.slice(firstBooksIndex, lastBooksIndex);
 
     // const deleteBookHandler = (id: number) => {
     //     console.log(books);
@@ -38,18 +48,16 @@ export const Books = () => {
         (async () => {
             try {
                 const result = await getAllBooks();
-                setBooks(result);
+                //setBooks(result);
+                dispatch(setBooks(result));
                 setIsLoading(false);
-                console.log(books);
             } catch (error) {
                 console.error('Error:', error);
             }
         })();
     }, []);
 
-    const lastBooksIndex = currentPage * booksPerPage;
-    const firstBooksIndex = lastBooksIndex - booksPerPage;
-    const currentBooks = books.slice(firstBooksIndex, lastBooksIndex);
+    console.log(booksState);
 
     return (
         <div className="w-full h-full">
@@ -64,16 +72,8 @@ export const Books = () => {
                         </p>
                     </div>
                     <div className="grid gap-10 grid-cols-3 grid-rows-3 my-28 w-3/4">
-                        {/*mx-20 */}
                         {currentBooks.map((book, index) => (
-                            // () => props.bookHandler(book);
-                            // console.log(book);
-
-                            <Book
-                                book={book}
-                                key={index}
-                                //bookHandler={() => props.bookHandler(book)}
-                            /> //bookHandler={bookHandler}
+                            <Book book={book} key={index} />
 
                             // <a href={`/books/bookDetails`} key={index}>
                             //
@@ -108,7 +108,7 @@ export const Books = () => {
                             // </div>
                         ))}
                         <PaginationBooks
-                            totalBooks={books.length}
+                            totalBooks={booksState.length}
                             booksPerPage={booksPerPage}
                             currentPage={currentPage}
                             setCurrentPage={setCurrentPage}

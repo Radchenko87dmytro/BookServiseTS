@@ -19,11 +19,19 @@ export const PaginationBooks = ({
     //const [currentPage, setCurrentPage] = useState(1)
     let pages = [];
 
-    for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage) && i < 11; i++) {
+    for (
+        let i = 1;
+        i <= Math.ceil(totalBooks / booksPerPage) &&
+        i <
+            (process.env.REACT_APP_PAGE_COUNT
+                ? parseInt(process.env.REACT_APP_PAGE_COUNT)
+                : 0);
+        i++
+    ) {
         pages.push(i);
     }
-
-    //console.log(totalBooks / booksPerPage);
+    //console.log(process.env.REACT_APP_PAGE_COUNT);
+    //console.log(process.env.API_URL);
     //currentPage = 3;
 
     // const bgAfterClick = `bg-lime-500`;
@@ -31,7 +39,7 @@ export const PaginationBooks = ({
     let background;
 
     return (
-        <div className="flex flex-wrap justify-center  col-span-3 h-1/2">
+        <div className="flex flex-wrap justify-center items-center  col-span-3 h-1/3 bg-slate-500">
             {pages.map((page, index) => {
                 currentPage == page
                     ? (background = `bg-lime-500`)

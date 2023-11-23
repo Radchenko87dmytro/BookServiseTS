@@ -107,12 +107,15 @@ export const Books = () => {
                             //     </p>
                             // </div>
                         ))}
-                        <PaginationBooks
-                            totalBooks={booksState.length}
-                            booksPerPage={booksPerPage}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                        />
+                        <p className="bg-slate-100">
+                            11
+                            <PaginationBooks
+                                totalBooks={booksState.length}
+                                booksPerPage={booksPerPage}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </p>
                     </div>
                 </div>
             )}

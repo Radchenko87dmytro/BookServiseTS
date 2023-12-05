@@ -74,48 +74,15 @@ export const Books = () => {
                     <div className="grid gap-10 grid-cols-3 grid-rows-3 my-28 w-3/4">
                         {currentBooks.map((book, index) => (
                             <Book book={book} key={index} />
-
-                            // <a href={`/books/bookDetails`} key={index}>
-                            //
-                            // </a>
-
-                            // <div
-                            //     className="mx-10 border-4 my-24 rounded-md border-cyan-700 border-solid bg-slate-100 "
-                            //     key={index}
-                            // >
-                            //     <Hyperlink
-                            //         content={'hyperlink'}
-                            //         link={`/book/${'hyperlink'}/{book.page}`}
-                            //         //book/:id/:page
-                            //     />
-                            //     <p className="p-6 flex justify-center bg-lime-300 m-6 rounded-md ">
-                            //         {book.genre}
-                            //     </p>
-                            //     <p className="flex justify-between m-4 rounded-md">
-                            //         <Button
-                            //             //onClick={()=>{
-                            //             //    editBookHandler()
-                            //             //}}
-                            //             content={'Edit book'}
-                            //         />
-                            //         <Button
-                            //             // onClick={() => {
-                            //             //     deleteBookHandler(book.id);
-                            //             // }}
-                            //             content={'Delete book'}
-                            //         />
-                            //     </p>
-                            // </div>
                         ))}
-                        <p className="bg-slate-100">
-                            11
-                            <PaginationBooks
-                                totalBooks={booksState.length}
-                                booksPerPage={booksPerPage}
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}
-                            />
-                        </p>
+
+                        <PaginationBooks
+                            totalBooks={booksState.length}
+                            booksPerPage={booksPerPage}
+                            setBooksPerPage={setBooksPerPage}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                        />
                     </div>
                 </div>
             )}

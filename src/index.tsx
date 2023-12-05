@@ -8,6 +8,7 @@ import './index.css';
 import { BookDetails } from './screens/BookDetails';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import { Login } from './screens/Login';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     {
         path: '/book/:authorTitle', //'/book/:id/:page'
         element: <BookDetails />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
     },
 ]);
 

@@ -91,8 +91,16 @@ export const PaginationBooks = ({
                                 : `bg-indigo-600`
                         }
                         onClick={() => setCurrentPage(page)}
+                        width={''}
                     />
                 ))}
+
+                <button
+                    className="text-white rounded-xl p-1 m-1 border-white border-4 decoration-white text-2xl  hover:bg-lime-500"
+                    //onClick={NextPageHandler}
+                >
+                    {pages.length}
+                </button>
 
                 <button
                     className="text-white rounded-xl p-1 m-1 border-white border-4 decoration-white text-2xl  hover:bg-lime-500"

@@ -2,21 +2,21 @@ import React, { useState, useMemo } from 'react';
 import { Button } from '../../components/Button';
 
 export const Login = () => {
-    const [emailValue, setEmailValue] = useState('');
-    const [passwordValue, setPasswordValue] = useState('');
+    const [emailValue, setEmailValue] = useState<string>('');
+    const [passwordValue, setPasswordValue] = useState<string>('');
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const emailHandler = (event: any) => {
+    const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        //React.MouseEvent<HTMLButtonElement, MouseEvent>
         setEmailValue(event.target.value);
     };
 
-    const passwordHandler = (event: any) => {
+    const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(event.target.value);
-        console.log(typeof event);
-        console.log(event);
     };
 
     const saveDataInput = () => {
-        const inputValue = {
+        let inputValue = {
             email: emailValue,
             password: passwordValue,
         };
@@ -43,7 +43,18 @@ export const Login = () => {
                     placeholder="Password"
                     className="rounded-xl  border-2 border-neutral-300 p-2 w-full mb-4 ml-2"
                     onChange={passwordHandler}
+                    type={showPassword ? 'text' : 'password'}
                 ></input>
+                <div
+                    className="flex flex-row-reverse w-full -mt-4"
+                    onClick={() => setShowPassword((state) => !state)}
+                >
+                    {showPassword ? (
+                        <p className=" text-xs">Hide password</p>
+                    ) : (
+                        <p className=" text-xs">Show password</p>
+                    )}
+                </div>
 
                 <Button
                     content={'Submit'}

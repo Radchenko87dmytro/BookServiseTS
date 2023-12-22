@@ -4,6 +4,7 @@ export interface book {
     id: number;
     name: string;
     content: string;
+    message: string;
 }
 
 export interface WolnelekturyAPIType {
@@ -69,4 +70,10 @@ export interface Translator {
 
 export interface StoreType {
     booksReducer: { books: WolnelekturyAPIType[] };
+}
+
+export interface getContentType {
+    contentReducer: {
+        content: [{ id: number }, { name: string }, { message: string }];
+    };
 }

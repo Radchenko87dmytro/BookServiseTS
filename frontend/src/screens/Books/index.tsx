@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StoreType, book } from '../../types';
+import { StoreType, book, getContentType } from '../../types';
 import { Hyperlink } from '../../components/Hyperlink';
 import { Button } from '../../components/Button';
 import { getAllBooks } from '../../apiClient';
@@ -10,7 +10,8 @@ import { BookDetails } from '../BookDetails';
 import { Navbar } from '../../components/Navbar';
 import { Loading } from '../../components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBooks } from '../../reducer';
+import { setBooks, setContent } from '../../reducer';
+import { getBooksApi } from '../../apiClient';
 
 interface props {
     //books: WolnelekturyAPIType;
@@ -26,9 +27,16 @@ export const Books = () => {
     const booksState = useSelector(
         (state: StoreType) => state.booksReducer.books
     );
-    console.log(booksState);
+    //console.log(booksState);
+
+    const getContentState = useSelector(
+        (state: getContentType) => state.contentReducer.content //.content
+    );
+    console.log(getContentState);
+
     const [isLoading, setIsLoading] = useState(true);
     //const [books, setBooks] = useState<WolnelekturyAPIType[]>([]);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage, setBooksPerPage] = useState(6);
 
@@ -44,6 +52,56 @@ export const Books = () => {
     //     //setBookValue(bookValue.filter((item: {}) => item.id !== id));
     // };
 
+    /* ASYNC */
+    const getUser = async () => {
+        return {
+            username: 'Tomek2020',
+            lvl: 20,
+        };
+    };
+
+    const getRoom = async () => {
+        return {
+            room: 200,
+            floor: 2,
+        };
+    };
+
+    const age = 16;
+
+    const shouldBuyABeer = new Promise((res, rej) => {
+        if (age >= 18) {
+            res('You can buy it');
+        } else {
+            rej('You can"t buy it');
+        }
+    });
+
+    /* Promises */
+    getUser()
+        .then((data) => {
+            console.log('Data Promises: ', data);
+            getRoom()
+                .then((value) => console.log('Room: ', value))
+                .catch((errRoom) => console.error('Error: ', errRoom));
+        })
+        .catch((err) => console.error('Error: ', err));
+
+    /* Try / catch */
+    (async () => {
+        try {
+            const response = await getUser();
+            const responseSecond = await getRoom();
+
+            console.log('Data try/catch: ', response, responseSecond);
+
+            const beer = await shouldBuyABeer;
+            console.log('Beer: ', beer);
+        } catch (err) {
+            console.error('Something went wrong MainView getUser: ', err);
+        }
+    })();
+
     useEffect(() => {
         (async () => {
             try {
@@ -57,7 +115,38 @@ export const Books = () => {
         })();
     }, []);
 
-    console.log(booksState);
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await getBooksApi();
+                //console.log(result);
+                dispatch(setContent(result.content));
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        })();
+    }, []);
+
+    // function getBooksApi() {
+    //     return new Promise((resolve, reject) => {
+    //
+    //             //resolve(" dane");
+    //             reject(" błąd");
+    //         }
+    //     });
+    // }
+
+    // getContent()
+    //     .then(result => {
+    //         const result = await getAllBooks();
+
+    //         dispatch(setBooks(result));
+    //         setIsLoading(false);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
 
     return (
         <div className="w-full h-full">

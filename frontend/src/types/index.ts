@@ -3,7 +3,7 @@ import { title } from 'process';
 export interface book {
     id: number;
     name: string;
-    content: string;
+    content: [];
     message: string;
 }
 
@@ -72,8 +72,8 @@ export interface StoreType {
     booksReducer: { books: WolnelekturyAPIType[] };
 }
 
-export interface getContentType {
-    contentReducer: {
-        content: [{ id: number }, { name: string }, { message: string }];
+export interface storeType {
+    booksState: {
+        content: book[];
     };
 }

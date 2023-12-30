@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { booksReducer } from '../reducer';
-import { contentReducer } from '../reducer';
 
 export const store = configureStore({
-    reducer: { booksReducer, contentReducer },
+    reducer: { booksReducer },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

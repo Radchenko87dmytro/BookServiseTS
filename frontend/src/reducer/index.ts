@@ -10,22 +10,7 @@ const booksSlicer = createSlice({
     },
 });
 
-const getContentSlicer = createSlice({
-    name: 'getContentState',
-    initialState: { content: [] },
-    reducers: {
-        setContent: (state, action) => {
-            state.content = action.payload;
-        },
-    },
-});
-
 export const {
     actions: { setBooks },
     reducer: booksReducer,
 } = booksSlicer;
-
-export const {
-    actions: { setContent },
-    reducer: contentReducer,
-} = getContentSlicer;

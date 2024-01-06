@@ -2,4 +2,6 @@
 export interface Book {
     name: string;
     id: number;
+    createdAt: Data;
+    updatedAt: Data;
 }

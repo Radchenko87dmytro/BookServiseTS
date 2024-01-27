@@ -5,14 +5,10 @@ import { Book } from '../types';
 export const bookSchema = new Schema<Book>(
     {
         name: { type: String, required: true },
-        id: { type: Number, required: true },
+        createdAt: { type: String, required: false },
+        updatedAt: { type: String, required: false },
     },
-    {
-        createdAt: { type: Data, required: false },
-        updatedAt: { type: Data, required: false },
-    },
-    { collection: 'users' },
-    { virtuals: true }
+    { collection: 'books', virtuals: true }
 );
 
 bookSchema.pre('save', function (next) {

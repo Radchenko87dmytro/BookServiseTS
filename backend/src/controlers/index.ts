@@ -1,18 +1,19 @@
-import { databaseResponseParser } from './../common/index';
+import { databaseResponseParser, deepCopyParser } from './../common/index';
+
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { bookModel } from '../schemas/booksSchema';
 import { Book, response, responseDB } from '../types';
 import { Types } from 'mongoose';
 
-databaseResponseParser([
-    {
-        _id: '659775ef0e078dff7e51b976',
-        name: 'test-0',
-        id: 1,
-        __v: 0,
-    },
-]);
+// databaseResponseParser([
+//     {
+//         _id: '659775ef0e078dff7e51b976',
+//         name: 'test-0',
+//         id: 1,
+//         __v: 0,
+//     },
+// ]);
 
 class BookController {
     async createBook(req: Request, res: Response) {
@@ -21,7 +22,7 @@ class BookController {
             const newBook = await bookModel.create({ name });
             return res.status(200).json({
                 message: 'Book created successfully',
-                data: newBook,
+                data: databaseResponseParser(deepCopyParser(newBook)),
             });
         } catch (e) {
             return res.status(500).json({ message: 'Server Error', data: e });
@@ -33,9 +34,8 @@ class BookController {
             const books = await bookModel.find();
             return res.status(200).json({
                 message: 'Books gets successfully',
-                data: books,
+                data: databaseResponseParser(deepCopyParser(books)),
             });
-            console.log(books);
         } catch (e) {
             return res.status(500).json({ message: 'Server Error', data: e });
         }
@@ -53,9 +53,14 @@ class BookController {
             }
             res.status(200).json({
                 message: 'Book found',
-                data: databaseResponseParser([book]),
+                data: databaseResponseParser(deepCopyParser(book)),
             });
-            console.log(book);
+
+            const DeepCopy = JSON.parse(JSON.stringify(book));
+            console.log(
+                'bookDeepCopy',
+                databaseResponseParser(deepCopyParser(book))
+            );
         } catch (e) {
             return res.status(500).json({ message: 'Server Error', data: e });
         }
@@ -80,7 +85,7 @@ class BookController {
 
             res.status(200).json({
                 message: 'Book updated successfully',
-                data: book,
+                data: databaseResponseParser(deepCopyParser(book)),
             });
         } catch (e) {
             return res.status(500).json({ message: 'Server Error', data: e });
@@ -100,7 +105,7 @@ class BookController {
 
             return res.status(200).json({
                 message: 'Book deleted successfully',
-                data: book,
+                data: databaseResponseParser(JSON.parse(JSON.stringify(book))),
             });
         } catch (e) {
             return res.status(500).json({ message: 'Server Error', data: e });

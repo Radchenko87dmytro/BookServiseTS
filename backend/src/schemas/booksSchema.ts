@@ -4,7 +4,8 @@ import { Book } from '../types';
 
 export const bookSchema = new Schema<Book>(
     {
-        name: { type: String, required: true },
+        title: { type: String, required: true },
+        content: { type: String, require: true },
         createdAt: { type: String, required: false },
         updatedAt: { type: String, required: false },
     },

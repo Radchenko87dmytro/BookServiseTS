@@ -30,11 +30,12 @@ async function run() {
         });
 
         const book = new bookModel({
-            name: 'test-7',
+            title: 'test-7',
+            content: 'content',
         });
         await book.save();
 
-        console.log(book.name);
+        console.log(book.title);
     } catch (error) {
         console.log(error);
     }

@@ -3,7 +3,8 @@ import { Document } from 'mongoose';
 import { Types } from 'mongoose';
 
 export interface Book extends Document {
-    name: string;
+    title: string;
+    content: string;
     createdAt: String;
     updatedAt: String;
 }
@@ -16,6 +17,10 @@ export interface response {
 export interface responseDB {
     _id?: string | number; //Types.ObjectId
     id?: string | number;
-    name: string;
+    title: string;
     __v?: number;
+
+    //slice: (books: any)=>[string[] | number[]];
+    // sort: () => Book[];
+    // reverse: () => Book[];
 }
